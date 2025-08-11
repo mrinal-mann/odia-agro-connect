@@ -3,20 +3,60 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Bell, LogOut, Globe } from "lucide-react";
 import { useState } from "react";
 import { useNotifications } from "@/contexts/NotificationsContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function TopBar() {
   const { t, lang, setLang } = useLang();
   const { user, logout } = useAuth();
   const { notifications, clear } = useNotifications();
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  const navItems =
+    user?.role === "HUB"
+      ? [
+          { to: "/hub/dashboard", label: "Dashboard" },
+          { to: "/hub/queue", label: "Queue" },
+          { to: "/hub/tenders", label: "Tenders" },
+        ]
+      : user?.role === "FARMER"
+      ? [{ to: "/farmer/dashboard", label: "Dashboard" }]
+      : user?.role === "BUYER"
+      ? [
+          { to: "/buyer/market", label: "Market" },
+          { to: "/buyer/orders", label: "Orders" },
+        ]
+      : [];
 
   return (
     <header className="sticky top-0 z-30 bg-background/80 backdrop-blur border-b">
       <div className="container flex items-center justify-between h-14">
-        <Link to="/" className="font-semibold tracking-tight">
-          {t("appTitle")}
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link to="/" className="font-semibold tracking-tight">
+            {t("appTitle")}
+          </Link>
+          {user && navItems.length > 0 && (
+            <nav className="hidden sm:flex items-center gap-1" aria-label="Primary">
+              {navItems.map((i) => {
+                const active = location.pathname === i.to;
+                return (
+                  <Link
+                    key={i.to}
+                    to={i.to}
+                    className={
+                      "px-3 py-1.5 rounded-md border text-sm transition-colors " +
+                      (active
+                        ? "bg-primary/10 text-primary border-primary"
+                        : "hover:bg-muted border-transparent")
+                    }
+                  >
+                    {i.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
+        </div>
         <div className="flex items-center gap-3">
           <button
             aria-label="language"

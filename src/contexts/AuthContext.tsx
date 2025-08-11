@@ -14,14 +14,15 @@ interface AuthCtx {
 const AuthContext = createContext<AuthCtx | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const raw = localStorage.getItem("auth_user");
+    return raw ? JSON.parse(raw) : null;
+  });
   const [requestingOtp, setRequestingOtp] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     seedIfEmpty();
-    const raw = localStorage.getItem("auth_user");
-    if (raw) setUser(JSON.parse(raw));
   }, []);
 
   const sendOtp = async (phone: string) => {
