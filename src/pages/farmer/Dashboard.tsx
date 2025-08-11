@@ -28,6 +28,11 @@ export default function FarmerDashboard() {
     if (user) setMyBookings(listBookingsByFarmer(user.id));
   }, [user, result]);
 
+  const hubCode = useMemo(() => {
+    const sel = hubs.find((h) => h.id === form.preferredHub);
+    return sel?.code || hubs[0]?.code || "HUB";
+  }, [hubs, form.preferredHub]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -49,7 +54,7 @@ export default function FarmerDashboard() {
   return (
     <div className="container py-6 space-y-8">
       <h1 className="text-2xl font-semibold">Farmer Dashboard</h1>
-      <AINoticeBoard />
+      <AINoticeBoard crop={form.cropType} hubCode={hubCode} />
 
       <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4">
         <label className="block text-sm">
