@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { getHubs, getInventoryByHub } from "@/lib/mockApi";
-import { Hub, InventoryLot } from "@/lib/types";
+import { Hub, InventoryLot, Crop } from "@/lib/types";
 import IoTLiveTiles from "@/components/IoTLiveTiles";
-
+import AISuggestionDashboard from "@/components/AISuggestionDashboard";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 export default function HubDashboard() {
   const [hub, setHub] = useState<Hub | null>(null);
   const [inv, setInv] = useState<InventoryLot[]>([]);
-
+  const [cropSel, setCropSel] = useState<Crop>("TOMATO");
   useEffect(() => {
     const hubs = getHubs();
     const h = hubs[0] || null; // MVP
@@ -20,7 +21,32 @@ export default function HubDashboard() {
   if (!hub) return null;
   return (
     <div className="container py-6 space-y-6">
-      <h1 className="text-2xl font-semibold">Hub Dashboard</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Hub Dashboard</h1>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="rounded-md border px-3 py-2 hover:bg-muted">AI Suggestions</button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>AI Suggestion Dashboard</DialogTitle>
+            </DialogHeader>
+            <div className="mb-3">
+              <label className="block text-sm mb-1">Crop</label>
+              <select
+                className="w-full rounded-md border px-3 py-2"
+                value={cropSel}
+                onChange={(e) => setCropSel(e.target.value as Crop)}
+              >
+                <option value="TOMATO">Tomato</option>
+                <option value="ONION">Onion</option>
+                <option value="OKRA">Okra</option>
+              </select>
+            </div>
+            <AISuggestionDashboard crop={cropSel} hubCode={hub.code} />
+          </DialogContent>
+        </Dialog>
+      </div>
       <div className="rounded-md border p-4">
         <div className="flex items-center justify-between mb-2">
           <div className="font-medium">Capacity Used</div>
