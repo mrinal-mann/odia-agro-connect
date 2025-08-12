@@ -5,7 +5,8 @@ import { getHubs, createBooking, listBookingsByFarmer } from "@/lib/mockApi";
 import { Booking, Crop, Hub } from "@/lib/types";
 import QRCodeCard from "@/components/QRCodeCard";
 import AINoticeBoard from "@/components/AINoticeBoard";
-
+import AISuggestionDashboard from "@/components/AISuggestionDashboard";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 export default function FarmerDashboard() {
   const { user } = useAuth();
   const { t } = useLang();
@@ -53,9 +54,21 @@ export default function FarmerDashboard() {
 
   return (
     <div className="container py-6 space-y-8">
-      <h1 className="text-2xl font-semibold">Farmer Dashboard</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Farmer Dashboard</h1>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="rounded-md border px-3 py-2 hover:bg-muted">AI Suggestions</button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>AI Suggestion Dashboard</DialogTitle>
+            </DialogHeader>
+            <AISuggestionDashboard crop={form.cropType} hubCode={hubCode} />
+          </DialogContent>
+        </Dialog>
+      </div>
       <AINoticeBoard crop={form.cropType} hubCode={hubCode} />
-
       <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4">
         <label className="block text-sm">
           Farmer Name
