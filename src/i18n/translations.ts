@@ -2,7 +2,7 @@ export type LangKey = "en" | "or";
 
 export const dict = {
   en: {
-    appTitle: "Agri Supply Chain Portal",
+    appTitle: "O-Fresh",
     landingTagline: "Book. Approve. Store. Trade.",
     roleFarmer: "Farmer",
     roleHub: "Hub Authority",

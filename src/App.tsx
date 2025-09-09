@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TopBar from "@/components/TopBar";
@@ -20,6 +20,75 @@ import BuyerOrders from "@/pages/buyer/Orders";
 
 const queryClient = new QueryClient();
 
+const AppContent = () => {
+  const location = useLocation();
+  const showTopBar = location.pathname !== "/";
+
+  return (
+    <>
+      {showTopBar && <TopBar />}
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/auth" element={<AuthOTP />} />
+
+        <Route
+          path="/farmer/*"
+          element={
+            <GuardedRoute role="FARMER">
+              <FarmerDashboard />
+            </GuardedRoute>
+          }
+        />
+
+        <Route
+          path="/hub/dashboard"
+          element={
+            <GuardedRoute role="HUB">
+              <HubDashboard />
+            </GuardedRoute>
+          }
+        />
+        <Route
+          path="/hub/queue"
+          element={
+            <GuardedRoute role="HUB">
+              <HubQueue />
+            </GuardedRoute>
+          }
+        />
+        <Route
+          path="/hub/tenders"
+          element={
+            <GuardedRoute role="HUB">
+              <HubTenders />
+            </GuardedRoute>
+          }
+        />
+
+        <Route
+          path="/buyer/market"
+          element={
+            <GuardedRoute role="BUYER">
+              <BuyerMarket />
+            </GuardedRoute>
+          }
+        />
+        <Route
+          path="/buyer/orders"
+          element={
+            <GuardedRoute role="BUYER">
+              <BuyerOrders />
+            </GuardedRoute>
+          }
+        />
+
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -29,23 +98,7 @@ const App = () => (
         <LanguageProvider>
           <NotificationsProvider>
             <AuthProvider>
-              <TopBar />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<AuthOTP />} />
-
-                <Route path="/farmer/*" element={<GuardedRoute role="FARMER"><FarmerDashboard /></GuardedRoute>} />
-
-                <Route path="/hub/dashboard" element={<GuardedRoute role="HUB"><HubDashboard /></GuardedRoute>} />
-                <Route path="/hub/queue" element={<GuardedRoute role="HUB"><HubQueue /></GuardedRoute>} />
-                <Route path="/hub/tenders" element={<GuardedRoute role="HUB"><HubTenders /></GuardedRoute>} />
-
-                <Route path="/buyer/market" element={<GuardedRoute role="BUYER"><BuyerMarket /></GuardedRoute>} />
-                <Route path="/buyer/orders" element={<GuardedRoute role="BUYER"><BuyerOrders /></GuardedRoute>} />
-
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <AppContent />
             </AuthProvider>
           </NotificationsProvider>
         </LanguageProvider>
@@ -53,6 +106,5 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
 
 export default App;
