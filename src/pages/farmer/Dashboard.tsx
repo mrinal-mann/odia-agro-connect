@@ -6,7 +6,13 @@ import { Booking, Crop, Hub } from "@/lib/types";
 import QRCodeCard from "@/components/QRCodeCard";
 import AINoticeBoard from "@/components/AINoticeBoard";
 import AISuggestionDashboard from "@/components/AISuggestionDashboard";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 export default function FarmerDashboard() {
   const { user } = useAuth();
   const { t } = useLang();
@@ -20,6 +26,7 @@ export default function FarmerDashboard() {
   });
   const [result, setResult] = useState<Booking | null>(null);
   const [myBookings, setMyBookings] = useState<Booking[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setHubs(getHubs());
@@ -34,9 +41,33 @@ export default function FarmerDashboard() {
     return sel?.code || hubs[0]?.code || "HUB";
   }, [hubs, form.preferredHub]);
 
+  const clearError = () => {
+    if (error) setError(null);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
+
+    // Clear previous error
+    setError(null);
+
+    // Validate required fields
+    if (!form.preferredHub) {
+      setError("Please select a hub");
+      return;
+    }
+
+    if (!form.farmerName.trim()) {
+      setError("Please enter farmer name");
+      return;
+    }
+
+    if (form.quantityKg <= 0) {
+      setError("Please enter a valid quantity");
+      return;
+    }
+
     const { booking } = createBooking({
       farmerId: user.id,
       hubId: form.preferredHub,
@@ -58,7 +89,9 @@ export default function FarmerDashboard() {
         <h1 className="text-2xl font-semibold">Farmer Dashboard</h1>
         <Dialog>
           <DialogTrigger asChild>
-            <button className="rounded-md border px-3 py-2 hover:bg-muted">AI Suggestions</button>
+            <button className="rounded-md border px-3 py-2 hover:bg-muted">
+              AI Suggestions
+            </button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -72,15 +105,34 @@ export default function FarmerDashboard() {
       <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4">
         <label className="block text-sm">
           Farmer Name
-          <input className="mt-1 w-full rounded-md border px-3 py-2" value={form.farmerName} onChange={(e) => setForm((f) => ({ ...f, farmerName: e.target.value }))} />
+          <input
+            className="mt-1 w-full rounded-md border px-3 py-2"
+            value={form.farmerName}
+            onChange={(e) => {
+              clearError();
+              setForm((f) => ({ ...f, farmerName: e.target.value }));
+            }}
+          />
         </label>
         <label className="block text-sm">
           Registration ID
-          <input className="mt-1 w-full rounded-md border px-3 py-2" value={form.registrationId} onChange={(e) => setForm((f) => ({ ...f, registrationId: e.target.value }))} />
+          <input
+            className="mt-1 w-full rounded-md border px-3 py-2"
+            value={form.registrationId}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, registrationId: e.target.value }))
+            }
+          />
         </label>
         <label className="block text-sm">
           {t("cropType")}
-          <select className="mt-1 w-full rounded-md border px-3 py-2" value={form.cropType} onChange={(e) => setForm((f) => ({ ...f, cropType: e.target.value as Crop }))}>
+          <select
+            className="mt-1 w-full rounded-md border px-3 py-2"
+            value={form.cropType}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, cropType: e.target.value as Crop }))
+            }
+          >
             <option value="TOMATO">Tomato</option>
             <option value="ONION">Onion</option>
             <option value="OKRA">Okra</option>
@@ -88,18 +140,43 @@ export default function FarmerDashboard() {
         </label>
         <label className="block text-sm">
           {t("quantityKg")}
-          <input type="number" className="mt-1 w-full rounded-md border px-3 py-2" value={form.quantityKg} onChange={(e) => setForm((f) => ({ ...f, quantityKg: Number(e.target.value) }))} />
+          <input
+            type="number"
+            className="mt-1 w-full rounded-md border px-3 py-2"
+            value={form.quantityKg}
+            onChange={(e) => {
+              clearError();
+              setForm((f) => ({ ...f, quantityKg: Number(e.target.value) }));
+            }}
+          />
         </label>
         <label className="block text-sm sm:col-span-2">
           {t("preferredHub")}
-          <select className="mt-1 w-full rounded-md border px-3 py-2" value={form.preferredHub} onChange={(e) => setForm((f) => ({ ...f, preferredHub: e.target.value }))}>
+          <select
+            className="mt-1 w-full rounded-md border px-3 py-2"
+            value={form.preferredHub}
+            onChange={(e) => {
+              clearError();
+              setForm((f) => ({ ...f, preferredHub: e.target.value }));
+            }}
+          >
             <option value="">Select hub</option>
             {hubs.map((h) => (
-              <option key={h.id} value={h.id}>{h.name} ({h.code})</option>
+              <option key={h.id} value={h.id}>
+                {h.name} ({h.code})
+              </option>
             ))}
           </select>
         </label>
-        <button type="submit" className="sm:col-span-2 rounded-md border px-3 py-2 hover:bg-muted">{t("bookSlot")}</button>
+        <button
+          type="submit"
+          className="sm:col-span-2 rounded-md border px-3 py-2 hover:bg-muted"
+        >
+          {t("bookSlot")}
+        </button>
+        {error && (
+          <p className="sm:col-span-2 text-destructive text-sm">{error}</p>
+        )}
       </form>
 
       {result && (

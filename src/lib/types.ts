@@ -42,6 +42,7 @@ export interface InventoryLot {
   hubId: string;
   crop: Crop;
   qtyKg: number;
+  reservedKg?: number; // How much is reserved for tenders
   grade?: string | null;
   inAt?: string | null;
   outAt?: string | null;

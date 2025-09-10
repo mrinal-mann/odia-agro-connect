@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O-FRESH - Digitizing Agriculture in Odisha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8f0e3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(69, 123, 88, 0.1) 0%, rgba(69, 123, 88, 0.05) 100%);
+            animation: float 20s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 5s;
+        }
+
+        .shape3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(69, 123, 88, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(69, 123, 88, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(69, 123, 88, 0);
+            }
+        }
+
+        .logo-icon::before {
+            content: '🌿';
+            font-size: 20px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .language-selector {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(69, 123, 88, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(69, 123, 88, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #457b58 0%, #5a9b70 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(69, 123, 88, 0.3);
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(69, 123, 88, 0.4);
+            background: linear-gradient(135deg, #5a9b70 0%, #457b58 100%);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 5% 4rem;
+            min-height: 100vh;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #4a4a4a;
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .device-mockup {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .laptop {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 15px 15px 5px 5px;
+            padding: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .laptop-screen {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .screen-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .screen-header .logo-small {
+            font-weight: bold;
+            color: #457b58;
+        }
+
+        .screen-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .screen-line {
+            height: 12px;
+            background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 100%);
+            border-radius: 6px;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        .screen-line:nth-child(2) { width: 80%; }
+        .screen-line:nth-child(3) { width: 60%; }
+
+        .phone {
+            position: absolute;
+            right: -50px;
+            bottom: -30px;
+            width: 180px;
+            height: 360px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite 0.5s;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-content {
+            text-align: center;
+        }
+
+        .phone-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
+            border-radius: 15px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .cta-btn {
+            background: #457b58;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 5%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin: 2rem 5%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #1a1a1a;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(69, 123, 88, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: pulse 3s infinite;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(237, 241, 235, 0.8);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .tech-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(69, 123, 88, 0.2);
+        }
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(69, 123, 88, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .tech-info h3 {
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .mobile-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-header {
+            padding: 15px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .mobile-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+                        linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .otp-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #457b58;
+            letter-spacing: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding: 6rem 5% 2rem;
+                min-height: auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .phone {
+                position: static;
+                margin: 2rem auto 0;
+            }
+
+            .features {
+                margin: 1rem 3%;
+                padding: 2rem 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tech-features {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .btn-primary {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .features-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>O-FRESH</span>
+        </div>
+        <div class="nav-right">
+            <select class="language-selector">
+                <option>English</option>
+                <option>ଓଡ଼ିଆ</option>
+            </select>
+            <button class="btn-primary">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Digitizing Agriculture in Odisha</h1>
+            <p class="subtitle">A digital supply chain platform for farmers, hubs, and buyers.</p>
+            <button class="btn-primary">Get Started</button>
+        </div>
+        <div class="hero-visual">
+            <div class="device-mockup">
+                <div class="laptop">
+                    <div class="laptop-screen">
+                        <div class="screen-header">
+                            <span class="logo-small">O-FRESH</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="screen-line"></div>
+                            <div class="screen-line"></div>
+                            <div class="screen-line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone">
+                    <div class="phone-screen">
+                        <div class="phone-content">
+                            <div class="phone-logo">🌿</div>
+                            <button class="cta-btn">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="features-title">Empowering the Agricultural Ecosystem</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3 class="feature-title">Farmer</h3>
+                <p class="feature-description">Manage crop bookings and market trends</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏪</div>
+                <h3 class="feature-title">Hub</h3>
+                <p class="feature-description">Optimize storage and processing</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3 class="feature-title">Buyer</h3>
+                <p class="feature-description">Browse inventory and place orders</p>
+            </div>
+        </div>
+
+        <div class="tech-features">
+            <div class="tech-card">
+                <div class="tech-icon">🤖</div>
+                <div class="tech-info">
+                    <h3>AI</h3>
+                    <p>Recommendations</p>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">📡</div>
+                <div class="tech-info">
+                    <h3>IoT</h3>
+                    <p>Monitoring</p>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">👤</div>
+                <div class="tech-info">
+                    <h3>OTP</h3>
+                    <p>Authentication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
