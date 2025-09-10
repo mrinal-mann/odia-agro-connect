@@ -1,710 +1,1082 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O-FRESH - Digitizing Agriculture in Odisha</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Odia Agro Connect - Complete Agricultural Supply Chain Digitization
+    </title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f1e8 0%, #e8f0e3 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
 
-        /* Animated background shapes */
-        .bg-shape {
-            position: fixed;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(69, 123, 88, 0.1) 0%, rgba(69, 123, 88, 0.05) 100%);
-            animation: float 20s infinite ease-in-out;
-            z-index: -1;
-        }
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
 
-        .shape1 {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            right: -150px;
-            animation-delay: 0s;
-        }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
 
-        .shape2 {
-            width: 200px;
-            height: 200px;
-            bottom: -100px;
-            left: -100px;
-            animation-delay: 5s;
-        }
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2d7a3e;
+      }
 
-        .shape3 {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            right: 10%;
-            animation-delay: 10s;
-        }
+      .logo::before {
+        content: "🌾";
+        margin-right: 0.5rem;
+        font-size: 1.8rem;
+      }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            33% {
-                transform: translate(30px, -30px) rotate(120deg);
-            }
-            66% {
-                transform: translate(-20px, 20px) rotate(240deg);
-            }
-        }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
 
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 5%;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            animation: slideDown 0.6s ease-out;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        }
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #2d7a3e;
+        transition: width 0.3s ease;
+      }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1a1a1a;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
 
-        .logo-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
+      .nav-links a:hover {
+        color: #2d7a3e;
+      }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(69, 123, 88, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(69, 123, 88, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(69, 123, 88, 0);
-            }
-        }
+      .install-btn {
+        background: linear-gradient(135deg, #2d7a3e, #4a9d5f);
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-        .logo-icon::before {
-            content: '🌿';
-            font-size: 20px;
-        }
+      .install-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(45, 122, 62, 0.3);
+      }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+            135deg,
+            rgba(45, 122, 62, 0.9),
+            rgba(74, 157, 95, 0.8)
+          ),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%234a9d5f"/><circle cx="20" cy="20" r="2" fill="%23f0f9f4" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="%23ffffff" opacity="0.2"/><circle cx="40" cy="70" r="2.5" fill="%23e8f5e9" opacity="0.4"/><circle cx="60" cy="90" r="1" fill="%23ffffff" opacity="0.3"/><rect x="10" y="50" width="30" height="2" fill="%23c8e6c9" opacity="0.5"/><rect x="70" y="20" width="25" height="1.5" fill="%23a5d6a7" opacity="0.4"/></pattern></defs><rect width="1440" height="800" fill="url(%23grain)"/></svg>');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 5rem 5%;
+        position: relative;
+        overflow: hidden;
+      }
 
-        .language-selector {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(69, 123, 88, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 30s linear infinite;
+      }
 
-        .language-selector:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(69, 123, 88, 0.2);
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #457b58 0%, #5a9b70 100%);
-            color: white;
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(69, 123, 88, 0.3);
-            animation: fadeIn 1s ease-out 0.6s both;
+        to {
+          transform: rotate(360deg);
         }
+      }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(69, 123, 88, 0.4);
-            background: linear-gradient(135deg, #5a9b70 0%, #457b58 100%);
+      .hero-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-text {
+        animation: slideInLeft 1s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
         }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
 
-        /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8rem 5% 4rem;
-            min-height: 100vh;
-            gap: 4rem;
+      .hero-text h1 {
+        font-size: 3.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-text p {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 2.5rem;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: white;
+        color: #2d7a3e;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        background: #f0f9f4;
+      }
+
+      .role-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: slideInRight 1s ease;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .role-card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem 2rem;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .role-card:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .role-info {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .role-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #2d7a3e, #4a9d5f);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .role-card h3 {
+        color: #2d7a3e;
+        font-size: 1.3rem;
+      }
+
+      .arrow {
+        color: #2d7a3e;
+        font-size: 1.5rem;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 5%;
+        background: #f8fafb;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #2d7a3e;
+        margin-bottom: 3rem;
+      }
+
+      .features-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        border-radius: 15px;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+      }
+
+      .feature-card h3 {
+        color: #2d7a3e;
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-card p {
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      /* Workflow Section */
+      .workflow {
+        padding: 5rem 5%;
+        background: white;
+      }
+
+      .workflow-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .workflow-card {
+        background: linear-gradient(135deg, #f0f9f4, #e8f5e9);
+        padding: 2.5rem;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .workflow-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #2d7a3e, #4a9d5f);
+      }
+
+      .workflow-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(45, 122, 62, 0.15);
+      }
+
+      .workflow-card h3 {
+        color: #2d7a3e;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .workflow-content {
+        color: #555;
+      }
+
+      .chart-placeholder {
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(
+          90deg,
+          #c8e6c9 0%,
+          #a5d6a7 50%,
+          #c8e6c9 100%
+        );
+        border-radius: 10px;
+        margin-top: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart-placeholder::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: #2d7a3e;
+        animation: wave 3s ease-in-out infinite;
+      }
+
+      @keyframes wave {
+        to {
+          left: 100%;
+        }
+      }
+
+      .qr-placeholder {
+        width: 150px;
+        height: 150px;
+        background: #333;
+        margin: 1rem auto;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .qr-placeholder::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 5px,
+            white 5px,
+            white 10px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 5px,
+            white 5px,
+            white 10px
+          );
+        opacity: 0.1;
+      }
+
+      .price-tag {
+        background: #2d7a3e;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        display: inline-block;
+        margin: 1rem 0;
+      }
+
+      .action-button {
+        background: #2d7a3e;
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        border: none;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+        width: 100%;
+      }
+
+      .action-button:hover {
+        background: #4a9d5f;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(45, 122, 62, 0.3);
+      }
+
+      .profile-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+      }
+
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2d7a3e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .profile-info h4 {
+        color: #2d7a3e;
+        margin: 0;
+      }
+
+      .profile-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Testimonial Section */
+      .testimonial {
+        padding: 5rem 5%;
+        background: linear-gradient(135deg, #2d7a3e, #4a9d5f);
+        color: white;
+        text-align: center;
+      }
+
+      .testimonial-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .quote {
+        font-size: 1.5rem;
+        font-style: italic;
+        margin-bottom: 2rem;
+        position: relative;
+        padding: 0 3rem;
+      }
+
+      .quote::before,
+      .quote::after {
+        content: '"';
+        font-size: 3rem;
+        opacity: 0.3;
+        position: absolute;
+      }
+
+      .quote::before {
+        top: -20px;
+        left: 0;
+      }
+
+      .quote::after {
+        bottom: -40px;
+        right: 0;
+      }
+
+      .author {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .author-role {
+        opacity: 0.9;
+        margin-top: 0.5rem;
+      }
+
+      /* FAQ Section */
+      .faq {
+        padding: 5rem 5%;
+        background: #f8fafb;
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        background: white;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: #333;
+        transition: all 0.3s ease;
+      }
+
+      .faq-question:hover {
+        color: #2d7a3e;
+        background: #f0f9f4;
+      }
+
+      .faq-arrow {
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+      }
+
+      .faq-item.active .faq-arrow {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0 1.5rem;
+        color: #666;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 200px;
+        padding: 0 1.5rem 1.5rem;
+      }
+
+      /* Footer */
+      footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 3rem 5%;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .footer-brand::before {
+        content: "🌾";
+        margin-right: 0.5rem;
+        font-size: 1.8rem;
+      }
+
+      .footer-section h4 {
+        margin-bottom: 1rem;
+        color: #4a9d5f;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        line-height: 2;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section a:hover {
+        color: #4a9d5f;
+      }
+
+      .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
         }
 
         .hero-content {
-            flex: 1;
-            animation: slideInLeft 1s ease-out;
+          grid-template-columns: 1fr;
+          text-align: center;
         }
 
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .hero-text h1 {
+          font-size: 2.5rem;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: #1a1a1a;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            animation: fadeIn 1s ease-out 0.3s both;
+        .features-grid,
+        .workflow-grid {
+          grid-template-columns: 1fr;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
         }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: #4a4a4a;
-            margin-bottom: 2.5rem;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        .hero-visual {
-            flex: 1;
-            position: relative;
-            animation: slideInRight 1s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .device-mockup {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .laptop {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-            border-radius: 15px 15px 5px 5px;
-            padding: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .laptop-screen {
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .screen-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .screen-header .logo-small {
-            font-weight: bold;
-            color: #457b58;
-        }
-
-        .screen-content {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .screen-line {
-            height: 12px;
-            background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 100%);
-            border-radius: 6px;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        .screen-line:nth-child(2) { width: 80%; }
-        .screen-line:nth-child(3) { width: 60%; }
-
-        .phone {
-            position: absolute;
-            right: -50px;
-            bottom: -30px;
-            width: 180px;
-            height: 360px;
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-            border-radius: 25px;
-            padding: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            animation: float 6s ease-in-out infinite 0.5s;
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .phone-content {
-            text-align: center;
-        }
-
-        .phone-logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
-            border-radius: 15px;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-        }
-
-        .cta-btn {
-            background: #457b58;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 4rem 5%;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
-            margin: 2rem 5%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-        }
-
-        .features-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #1a1a1a;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out;
-            backdrop-filter: blur(5px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(69, 123, 88, 0.2);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #457b58 0%, #6ba082 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            animation: pulse 3s infinite;
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #1a1a1a;
-        }
-
-        .feature-description {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .tech-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tech-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: rgba(237, 241, 235, 0.8);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .tech-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(69, 123, 88, 0.2);
-        }
-
-        .tech-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(69, 123, 88, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-        }
-
-        .tech-info h3 {
-            font-size: 1.2rem;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
-        }
-
-        .tech-info p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .mobile-screen {
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 25px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mobile-header {
-            padding: 15px;
-            background: #f8f8f8;
-            border-bottom: 1px solid #e0e0e0;
-            font-weight: bold;
-            color: #1a1a1a;
-        }
-
-        .mobile-content {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qr-code {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
-                        linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-
-        .otp-display {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #457b58;
-            letter-spacing: 5px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 5%;
-            }
-
-            .hero {
-                flex-direction: column;
-                padding: 6rem 5% 2rem;
-                min-height: auto;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .phone {
-                position: static;
-                margin: 2rem auto 0;
-            }
-
-            .features {
-                margin: 1rem 3%;
-                padding: 2rem 1.5rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .tech-features {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-        @media (max-width: 480px) {
-            .nav-right {
-                gap: 1rem;
-            }
-
-            .btn-primary {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .features-title {
-                font-size: 1.8rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <!-- Animated Background Shapes -->
-    <div class="bg-shape shape1"></div>
-    <div class="bg-shape shape2"></div>
-    <div class="bg-shape shape3"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">
-            <div class="logo-icon"></div>
-            <span>O-FRESH</span>
-        </div>
-        <div class="nav-right">
-            <select class="language-selector">
-                <option>English</option>
-                <option>ଓଡ଼ିଆ</option>
-            </select>
-            <button class="btn-primary">Get Started</button>
-        </div>
-    </nav>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="logo">Odia Agro Connect</div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#workflow">Workflows</a></li>
+          <li><a href="#roles">Roles</a></li>
+          <li><a href="#market">Market</a></li>
+          <li><a href="#hubs">Hubs</a></li>
+          <li><a href="#docs">Docs</a></li>
+        </ul>
+        <a href="#" class="install-btn">▶ Install</a>
+      </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Digitizing Agriculture in Odisha</h1>
-            <p class="subtitle">A digital supply chain platform for farmers, hubs, and buyers.</p>
-            <button class="btn-primary">Get Started</button>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Complete Agricultural Supply Chain Digitization</h1>
+          <p>Progressive web app for farmers, buyers and hubs</p>
+          <a href="#" class="cta-button">Get Started</a>
         </div>
-        <div class="hero-visual">
-            <div class="device-mockup">
-                <div class="laptop">
-                    <div class="laptop-screen">
-                        <div class="screen-header">
-                            <span class="logo-small">O-FRESH</span>
-                        </div>
-                        <div class="screen-content">
-                            <div class="screen-line"></div>
-                            <div class="screen-line"></div>
-                            <div class="screen-line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="phone">
-                    <div class="phone-screen">
-                        <div class="phone-content">
-                            <div class="phone-logo">🌿</div>
-                            <button class="cta-btn">Get Started</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="role-cards">
+          <div class="role-card">
+            <div class="role-info">
+              <div class="role-icon">👨‍🌾</div>
+              <h3>FARMER</h3>
             </div>
+            <span class="arrow">→</span>
+          </div>
+          <div class="role-card">
+            <div class="role-info">
+              <div class="role-icon">🏛️</div>
+              <h3>HUB</h3>
+            </div>
+            <span class="arrow">→</span>
+          </div>
+          <div class="role-card">
+            <div class="role-info">
+              <div class="role-icon">🛒</div>
+              <h3>BUYER</h3>
+            </div>
+            <span class="arrow">→</span>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
-        <h2 class="features-title">Empowering the Agricultural Ecosystem</h2>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🌱</div>
-                <h3 class="feature-title">Farmer</h3>
-                <p class="feature-description">Manage crop bookings and market trends</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏪</div>
-                <h3 class="feature-title">Hub</h3>
-                <p class="feature-description">Optimize storage and processing</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🛒</div>
-                <h3 class="feature-title">Buyer</h3>
-                <p class="feature-description">Browse inventory and place orders</p>
-            </div>
+    <section class="features" id="features">
+      <h2 class="section-title">Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Role-based Access</h3>
+          <p>Customized interfaces for farmers, buyers, and hub operators</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>AI-powered Analytics</h3>
+          <p>Smart insights and predictions for better decision making</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌡️</div>
+          <h3>IoT Integration</h3>
+          <p>Real-time monitoring of storage conditions and quality</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>QR Code Bookings</h3>
+          <p>Quick and easy booking system with QR code verification</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="workflow" id="workflow">
+      <h2 class="section-title">Workflow Overview</h2>
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <h3>📈 Live GT Monitoring</h3>
+          <div class="workflow-content">
+            <p>Track gate terminal operations in real-time</p>
+            <div class="chart-placeholder"></div>
+            <p style="margin-top: 1rem">
+              <strong>Temp + 12°C</strong> | 🌾 In Quality
+            </p>
+            <button class="action-button">Learn More →</button>
+          </div>
         </div>
 
-        <div class="tech-features">
-            <div class="tech-card">
-                <div class="tech-icon">🤖</div>
-                <div class="tech-info">
-                    <h3>AI</h3>
-                    <p>Recommendations</p>
+        <div class="workflow-card">
+          <h3>🛡️ ASI Spoilage</h3>
+          <div class="workflow-content">
+            <p>Protecting storage quality with advanced monitoring systems</p>
+            <div style="text-align: center; margin: 1rem 0">
+              <div
+                style="
+                  display: inline-block;
+                  background: #e8f5e9;
+                  padding: 1rem;
+                  border-radius: 10px;
+                "
+              >
+                <div style="font-size: 2rem; color: #2d7a3e">📊</div>
+                <div style="margin-top: 0.5rem">
+                  <span style="color: #2d7a3e; font-weight: bold">Hold</span>
+                  <br />
+                  <span style="color: #4a9d5f">Sell</span>
                 </div>
+              </div>
             </div>
-            <div class="tech-card">
-                <div class="tech-icon">📡</div>
-                <div class="tech-info">
-                    <h3>IoT</h3>
-                    <p>Monitoring</p>
-                </div>
+            <button class="action-button" style="background: #4a9d5f">
+              Hold 3 May
+            </button>
+            <div class="profile-section">
+              <div class="profile-avatar">S</div>
+              <div class="profile-info">
+                <h4>ସୁରେଶ କୁ.</h4>
+                <p>Farmer</p>
+              </div>
             </div>
-            <div class="tech-card">
-                <div class="tech-icon">👤</div>
-                <div class="tech-info">
-                    <h3>OTP</h3>
-                    <p>Authentication</p>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <div class="workflow-card">
+          <h3>📋 QR Booking</h3>
+          <div class="workflow-content">
+            <p>Quick booking system with QR verification</p>
+            <div class="qr-placeholder">
+              <span style="font-size: 1rem">QR</span>
+            </div>
+            <div class="price-tag">$154 Perishables</div>
+            <button class="action-button">View Tenders</button>
+          </div>
+        </div>
+      </div>
     </section>
-</body>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+      <div class="testimonial-content">
+        <div class="quote">
+          Odia Agro Connect has transformed how we manage our produce and reach
+          buyers.
+        </div>
+        <div class="author">Suresh K.</div>
+        <div class="author-role">Farmer</div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I get started?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Simply download our progressive web app, create your profile based
+              on your role (Farmer, Hub, or Buyer), and start exploring the
+              features designed for your needs.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Is my data secure?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, we use enterprise-grade encryption and security measures to
+              protect all your data. Your information is stored securely and
+              never shared without your consent.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            What languages are supported?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>
+              We support Odia, Hindi, and English to ensure accessibility for
+              all users in the agricultural supply chain across Odisha and
+              neighboring regions.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            How can I contact support?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>
+              You can reach our support team through the in-app chat, email us
+              at support@odiaagroconnect.com, or call our helpline available
+              24/7.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-brand">Odia Agro Connect</div>
+          <p>
+            Revolutionizing agriculture through technology, connecting farmers,
+            hubs, and buyers for a sustainable future.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Features</h4>
+          <ul>
+            <li><a href="#features">Role-based Access</a></li>
+            <li><a href="#features">AI Analytics</a></li>
+            <li><a href="#features">IoT Integration</a></li>
+            <li><a href="#features">QR Bookings</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#help">Help Center</a></li>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 Odia Agro Connect. All rights reserved. Made with ❤️ for
+          Odisha's farmers.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // FAQ Toggle Functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const question = item.querySelector(".faq-question");
+
+          question.addEventListener("click", () => {
+            // Close other FAQ items
+            faqItems.forEach((otherItem) => {
+              if (otherItem !== item) {
+                otherItem.classList.remove("active");
+              }
+            });
+
+            // Toggle current item
+            item.classList.toggle("active");
+          });
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Header background change on scroll
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(255, 255, 255, 0.98)";
+          header.style.boxShadow = "0 2px 30px rgba(0, 0, 0, 0.15)";
+        } else {
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+        }
+      });
+
+      // Role card interactions
+      document.querySelectorAll(".role-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const role = this.querySelector("h3").textContent;
+          console.log(`Navigating to ${role} dashboard`);
+          // Add navigation logic here
+        });
+      });
+
+      // CTA button interaction
+      document
+        .querySelector(".cta-button")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          // Add get started logic here
+          console.log("Get Started clicked");
+        });
+
+      // Install button interaction
+      document
+        .querySelector(".install-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          // Add PWA install logic here
+          console.log("Install PWA");
+        });
+
+      // Action buttons in workflow cards
+      document.querySelectorAll(".action-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          const cardTitle =
+            this.closest(".workflow-card").querySelector("h3").textContent;
+          console.log(`Action button clicked in: ${cardTitle}`);
+          // Add specific action logic here
+        });
+      });
+
+      // Mobile menu toggle (if needed)
+      function toggleMobileMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe feature cards and workflow cards
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelectorAll(".feature-card, .workflow-card")
+          .forEach((card) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(30px)";
+            card.style.transition = "all 0.6s ease";
+            observer.observe(card);
+          });
+      });
+    </script>
+  </body>
 </html>
