@@ -31,9 +31,7 @@ export default function AuthOTP() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-4xl">🌾</span>
-            <h1 className="text-2xl font-bold text-green-700">
-              Odia Agro Connect
-            </h1>
+            <h1 className="text-2xl font-bold text-green-700">O-fresh</h1>
           </div>
           <h2 className="text-xl font-semibold text-green-800">
             {t("login")}{" "}

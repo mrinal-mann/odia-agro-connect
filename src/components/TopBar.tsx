@@ -34,9 +34,8 @@ export default function TopBar() {
         <div className="flex items-center gap-4">
           <Link
             to="/"
-            className="flex items-center gap-2 font-bold text-lg text-green-800 drop-shadow-lg"
+            className="flex items-center gap-3 font-bold text-lg text-green-800 drop-shadow-lg"
           >
-            <span className="text-2xl drop-shadow-lg">🌾</span>
             <span className="text-shadow-lg">{t("appTitle")}</span>
           </Link>
           {user && navItems.length > 0 && (

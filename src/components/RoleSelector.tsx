@@ -35,7 +35,7 @@ export default function RoleSelector() {
       <header className="flex items-center justify-between px-8 py-6 bg-white/80 backdrop-blur-sm border-b border-green-200">
         <div className="flex items-center gap-2 text-2xl font-bold text-green-700">
           <span className="text-3xl">🌾</span>
-          Odia Agro Connect
+          O-fresh
         </div>
         <nav className="flex items-center gap-8">
           <Link

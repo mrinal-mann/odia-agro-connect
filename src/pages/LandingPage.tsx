@@ -64,8 +64,8 @@ const LandingPage = () => {
       <header className="fixed top-0 w-full bg-white/20 backdrop-blur-lg border-b border-white/30 shadow-xl z-50 transition-all duration-300">
         <nav className="flex justify-between items-center px-5 py-4 max-w-7xl mx-auto">
           <div className="flex items-center text-2xl font-bold text-white drop-shadow-2xl">
-            <span className="mr-2 text-3xl drop-shadow-lg">🌾</span>
-            <span className="text-shadow-lg">Odia Agro Connect</span>
+            <span className="mr-2 text-3xl drop-shadow-lg">O</span>
+            <span className="text-shadow-lg">fresh</span>
           </div>
           <ul className="hidden md:flex list-none gap-2">
             <li>
@@ -94,64 +94,42 @@ const LandingPage = () => {
             </li>
             <li>
               <a
-                href="#roles"
+                href="#faq"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("roles");
+                  scrollToSection("faq");
                 }}
                 className="px-4 py-2 rounded-lg text-white/90 font-medium transition-all duration-200 hover:text-white hover:bg-white/20 backdrop-blur-sm drop-shadow-lg"
               >
-                Roles
+                FAQ
               </a>
             </li>
             <li>
               <a
-                href="#market"
+                href="#about"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("market");
+                  scrollToSection("about");
                 }}
                 className="px-4 py-2 rounded-lg text-white/90 font-medium transition-all duration-200 hover:text-white hover:bg-white/20 backdrop-blur-sm drop-shadow-lg"
               >
-                Market
-              </a>
-            </li>
-            <li>
-              <a
-                href="#hubs"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("hubs");
-                }}
-                className="px-4 py-2 rounded-lg text-white/90 font-medium transition-all duration-200 hover:text-white hover:bg-white/20 backdrop-blur-sm drop-shadow-lg"
-              >
-                Hubs
-              </a>
-            </li>
-            <li>
-              <a
-                href="#docs"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("docs");
-                }}
-                className="px-4 py-2 rounded-lg text-white/90 font-medium transition-all duration-200 hover:text-white hover:bg-white/20 backdrop-blur-sm drop-shadow-lg"
-              >
-                Docs
+                About
               </a>
             </li>
           </ul>
-          <button
-            onClick={handleInstall}
-            className="bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-lg backdrop-blur-sm border border-white/30 hover:border-white/40 transition-all duration-300 hover:transform hover:-translate-y-0.5 shadow-lg drop-shadow-lg"
-          >
-            ▶ Install
-          </button>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="hero min-h-screen flex items-center px-5 py-20 relative overflow-hidden">
+      <section
+        className="hero min-h-screen flex items-center px-5 py-20 relative overflow-hidden"
+        style={{
+          backgroundImage: "url(/bg.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="hero-content max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
           <div className="hero-text animate-slide-in-left">
             <h1 className="text-5xl md:text-6xl text-white mb-6 leading-tight drop-shadow-lg">
@@ -209,12 +187,15 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gray-50">
+      <section
+        id="features"
+        className="py-20 bg-gradient-to-b from-green-50/80 to-green-100/60 backdrop-blur-sm"
+      >
         <h2 className="text-4xl text-green-700 text-center mb-12 font-bold">
           Key Features
         </h2>
         <div className="max-w-6xl mx-auto px-5 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="feature-card bg-white p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="feature-card bg-white/90 backdrop-blur-sm p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl border border-green-100/50">
             <div className="feature-icon w-16 h-16 bg-gradient-to-r from-green-100 to-green-200 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl">
               👥
             </div>
@@ -225,7 +206,7 @@ const LandingPage = () => {
               Customized interfaces for farmers, buyers, and hub operators
             </p>
           </div>
-          <div className="feature-card bg-white p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="feature-card bg-white/90 backdrop-blur-sm p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl border border-green-100/50">
             <div className="feature-icon w-16 h-16 bg-gradient-to-r from-green-100 to-green-200 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl">
               📊
             </div>
@@ -236,7 +217,7 @@ const LandingPage = () => {
               Smart insights and predictions for better decision making
             </p>
           </div>
-          <div className="feature-card bg-white p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="feature-card bg-white/90 backdrop-blur-sm p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl border border-green-100/50">
             <div className="feature-icon w-16 h-16 bg-gradient-to-r from-green-100 to-green-200 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl">
               🌡️
             </div>
@@ -247,7 +228,7 @@ const LandingPage = () => {
               Real-time monitoring of storage conditions and quality
             </p>
           </div>
-          <div className="feature-card bg-white p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="feature-card bg-white/90 backdrop-blur-sm p-8 rounded-2xl text-center transition-all duration-300 shadow-lg hover:transform hover:-translate-y-2 hover:shadow-xl border border-green-100/50">
             <div className="feature-icon w-16 h-16 bg-gradient-to-r from-green-100 to-green-200 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl">
               📱
             </div>
@@ -262,93 +243,159 @@ const LandingPage = () => {
       </section>
 
       {/* Workflow Section */}
-      <section id="workflow" className="py-20 bg-white">
+      <section
+        id="workflow"
+        className="py-20 bg-gradient-to-b from-green-100/60 to-green-200/40 backdrop-blur-sm"
+      >
         <h2 className="text-4xl text-green-700 text-center mb-12 font-bold">
           Workflow Overview
         </h2>
-        <div className="max-w-6xl mx-auto px-5 grid md:grid-cols-3 gap-10">
-          <div className="workflow-card bg-gradient-to-br from-green-50 to-green-100 p-10 rounded-3xl relative overflow-hidden transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-green-700/15">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-700 to-green-600"></div>
-            <h3 className="text-green-700 mb-4 text-xl font-semibold">
-              📈 Live GT Monitoring
-            </h3>
-            <div className="workflow-content text-gray-600">
-              <p className="mb-4">
-                Track gate terminal operations in real-time
-              </p>
-              <div className="chart-placeholder w-full h-24 bg-gradient-to-r from-green-200 via-green-300 to-green-200 rounded-lg mb-4 relative overflow-hidden">
-                <div className="absolute top-1/2 left-[-100%] w-full h-0.5 bg-green-700 animate-wave"></div>
+        <div className="max-w-7xl mx-auto px-5">
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-auto">
+            {/* Live GT Monitoring - Takes 2 columns */}
+            <div className="lg:col-span-2 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-200">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-3xl">📈</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-green-700">
+                    Live GT Monitoring
+                  </h3>
+                  <p className="text-gray-600">Real-time operations tracking</p>
+                </div>
               </div>
-              <p className="mb-4">
-                <strong>Temp + 12°C</strong> | 🌾 In Quality
-              </p>
-              <button
-                onClick={() => handleActionButton("Live GT Monitoring")}
-                className="w-full bg-green-700 text-white py-3 px-8 rounded-full font-medium transition-all duration-300 hover:bg-green-600 hover:transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-700/30"
-              >
-                Learn More →
-              </button>
-            </div>
-          </div>
 
-          <div className="workflow-card bg-gradient-to-br from-green-50 to-green-100 p-10 rounded-3xl relative overflow-hidden transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-green-700/15">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-700 to-green-600"></div>
-            <h3 className="text-green-700 mb-4 text-xl font-semibold">
-              🛡️ ASI Spoilage
-            </h3>
-            <div className="workflow-content text-gray-600">
-              <p className="mb-4">
-                Protecting storage quality with advanced monitoring systems
-              </p>
-              <div className="text-center mb-4">
-                <div className="inline-block bg-green-100 p-4 rounded-lg">
-                  <div className="text-3xl text-green-700 mb-2">📊</div>
-                  <div>
-                    <span className="text-green-700 font-bold">Hold</span>
-                    <br />
-                    <span className="text-green-600">Sell</span>
+              <div className="chart-placeholder w-full h-32 bg-gradient-to-r from-green-100 via-green-200 to-green-100 rounded-xl mb-6 relative overflow-hidden">
+                <div className="absolute top-1/2 left-[-100%] w-full h-1 bg-green-600 animate-wave shadow-sm"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-white/80 px-4 py-2 rounded-lg backdrop-blur-sm">
+                    <span className="text-green-700 font-semibold">
+                      Live Data Stream
+                    </span>
                   </div>
                 </div>
               </div>
-              <button
-                onClick={() => handleActionButton("ASI Spoilage")}
-                className="w-full bg-green-600 text-white py-3 px-8 rounded-full font-medium transition-all duration-300 hover:bg-green-500 hover:transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-600/30 mb-4"
-              >
-                Hold 3 May
-              </button>
-              <div className="profile-section flex items-center gap-4 p-4 bg-white/50 rounded-lg">
-                <div className="profile-avatar w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white font-bold">
-                  S
+
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3 bg-green-50 px-4 py-3 rounded-xl">
+                  <span className="text-2xl">🌡️</span>
+                  <div>
+                    <span className="text-green-700 font-bold text-lg">
+                      +12°C
+                    </span>
+                    <p className="text-sm text-green-600">Temperature</p>
+                  </div>
                 </div>
-                <div className="profile-info">
-                  <h4 className="text-green-700 font-semibold m-0">
-                    ସୁରେଶ କୁ.
+                <div className="flex items-center gap-3 bg-green-50 px-4 py-3 rounded-xl">
+                  <span className="text-2xl">🌾</span>
+                  <div>
+                    <span className="text-green-700 font-bold">Quality</span>
+                    <p className="text-sm text-green-600">Excellent</p>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleActionButton("Live GT Monitoring")}
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 hover:from-green-700 hover:to-green-800 hover:transform hover:-translate-y-1 hover:shadow-lg"
+              >
+                View Dashboard →
+              </button>
+            </div>
+
+            {/* ASI Spoilage Section - Takes 1 column but split into 2 separate grids */}
+            <div className="space-y-6">
+              {/* ASI Spoilage Control */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-lg">🛡️</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-green-700">
+                    ASI Spoilage
+                  </h3>
+                </div>
+
+                <p className="text-gray-600 text-sm mb-4">
+                  Advanced quality monitoring
+                </p>
+
+                <div className="text-center mb-4">
+                  <div className="inline-block bg-gradient-to-r from-green-100 to-blue-100 p-4 rounded-xl">
+                    <div className="text-2xl text-green-700 mb-2">📊</div>
+                    <div className="space-y-1">
+                      <div className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-bold">
+                        Hold
+                      </div>
+                      <div className="bg-gray-200 text-gray-600 px-3 py-1 rounded-lg text-sm">
+                        Sell
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => handleActionButton("ASI Spoilage")}
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-2 px-4 rounded-xl text-sm font-semibold transition-all duration-300 hover:from-green-700 hover:to-green-800 hover:transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                  Hold 3 May
+                </button>
+              </div>
+
+              {/* Farmer Profile - Separate card */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <span className="text-sm">👤</span>
+                  </div>
+                  <h4 className="text-sm font-bold text-green-700">
+                    Active Farmer
                   </h4>
-                  <p className="text-sm text-gray-600 m-0">Farmer</p>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-green-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold shadow-sm">
+                    S
+                  </div>
+                  <div>
+                    <h4 className="text-green-700 font-semibold text-sm">
+                      ସୁରେଶ କୁ.
+                    </h4>
+                    <p className="text-xs text-gray-600">Active Farmer</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="workflow-card bg-gradient-to-br from-green-50 to-green-100 p-10 rounded-3xl relative overflow-hidden transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-green-700/15">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-700 to-green-600"></div>
-            <h3 className="text-green-700 mb-4 text-xl font-semibold">
-              📋 QR Booking
-            </h3>
-            <div className="workflow-content text-gray-600">
-              <p className="mb-4">Quick booking system with QR verification</p>
-              <div className="qr-placeholder w-36 h-36 bg-gray-800 mx-auto mb-4 rounded-lg flex items-center justify-center text-white text-4xl relative overflow-hidden">
-                <span className="text-base">QR</span>
-                <div className="absolute w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-10 animate-pulse"></div>
+            {/* QR Booking - Takes 1 column */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-2xl">📋</span>
+                </div>
+                <h3 className="text-xl font-bold text-green-700">QR Booking</h3>
               </div>
-              <div className="price-tag bg-green-700 text-white py-2 px-4 rounded-full font-bold inline-block mb-4">
+
+              <p className="text-gray-600 mb-6">
+                Quick booking with instant QR verification
+              </p>
+
+              <div className="qr-placeholder w-28 h-28 bg-gradient-to-br from-gray-800 to-gray-900 mx-auto mb-6 rounded-2xl flex items-center justify-center text-white shadow-lg relative overflow-hidden">
+                <span className="text-lg font-bold">QR</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-xl text-center font-bold mb-6 shadow-md">
                 $154 Perishables
               </div>
+
               <button
                 onClick={() => handleActionButton("QR Booking")}
-                className="w-full bg-green-700 text-white py-3 px-8 rounded-full font-medium transition-all duration-300 hover:bg-green-600 hover:transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-700/30"
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 hover:from-green-700 hover:to-green-800 hover:transform hover:-translate-y-1 hover:shadow-lg"
               >
-                View Tenders
+                Book Now
               </button>
             </div>
           </div>
@@ -356,8 +403,9 @@ const LandingPage = () => {
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-r from-green-700 to-green-600 text-white text-center">
-        <div className="max-w-4xl mx-auto px-5">
+      <section className="py-20 bg-gradient-to-r from-green-800/90 to-green-700/90 backdrop-blur-sm text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900/20 to-green-800/20"></div>
+        <div className="max-w-4xl mx-auto px-5 relative z-10">
           <div className="quote text-2xl italic mb-8 relative px-12">
             <span className="absolute -top-5 left-0 text-5xl opacity-30">
               "
@@ -365,8 +413,7 @@ const LandingPage = () => {
             <span className="absolute -bottom-10 right-0 text-5xl opacity-30">
               "
             </span>
-            Odia Agro Connect has transformed how we manage our produce and
-            reach buyers.
+            O-fresh has transformed how we manage our produce and reach buyers.
           </div>
           <div className="author font-semibold text-xl">Suresh K.</div>
           <div className="author-role opacity-90 mt-2">Farmer</div>
@@ -374,7 +421,10 @@ const LandingPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gray-50">
+      <section
+        id="faq"
+        className="py-20 bg-gradient-to-b from-green-200/40 to-green-300/30 backdrop-blur-sm"
+      >
         <h2 className="text-4xl text-green-700 text-center mb-12 font-bold">
           FAQ
         </h2>
@@ -403,7 +453,7 @@ const LandingPage = () => {
           ].map((faq, index) => (
             <div
               key={index}
-              className={`faq-item bg-white mb-4 rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg ${
+              className={`faq-item bg-white/90 backdrop-blur-sm mb-4 rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg border border-green-100/50 ${
                 activeFaq === index ? "active" : ""
               }`}
             >
@@ -433,12 +483,13 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-5 grid md:grid-cols-4 gap-12">
+      <footer className="bg-gradient-to-b from-green-900/95 to-green-950/95 backdrop-blur-sm text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-green-800/30 to-green-900/50"></div>
+        <div className="max-w-6xl mx-auto px-5 grid md:grid-cols-4 gap-12 relative z-10">
           <div className="footer-section">
             <div className="flex items-center text-2xl font-bold mb-4">
               <span className="mr-2 text-3xl">🌾</span>
-              Odia Agro Connect
+              O-fresh
             </div>
             <p>
               Revolutionizing agriculture through technology, connecting
@@ -563,10 +614,10 @@ const LandingPage = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+        <div className="mt-8 pt-8 border-t border-green-700/50 text-center text-green-200 relative z-10">
           <p>
-            &copy; 2024 Odia Agro Connect. All rights reserved. Made with ❤️ for
-            Odisha's farmers.
+            &copy; 2024 O-fresh. All rights reserved. Made with ❤️ for Odisha's
+            farmers.
           </p>
         </div>
       </footer>
